@@ -1,0 +1,44 @@
+---
+title: "ANA 515 - Visualization Activity"
+author: "Eduardo Dischinger"
+date: '2022-09-24'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/tennis-time/players_time.csv"
+tennis <- read.csv(url)
+#Using read.csv(url) I was able to read the dataset into R
+```
+
+```{r, include = FALSE}
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+```
+
+This dataframe has `r nrow(tennis)` rows and `r ncol(tennis)` columns. The number of observations is 218, so df is 217
+
+```{r, include=TRUE}
+summarytable<- summary(tennis$seconds_added_per_point)
+print(summarytable)
+```
+
+```{r, include=TRUE}
+# Kernel Density Plot
+d <- density(tennis$seconds_added_per_point) 
+plot(d)
+```
+```
+#We can see that our dataset points to the majorit of players adding time to tennis points. The vast majority is adding between 0 to 5 second on average per point. We have the average tennis point lenght from the ATP Tour, and the list of tennis players selected reflects a longer duration of tennis points (mean = 0.94 seconds, median = 1.96 seconds)
+```
+
+
+
+```{r, include=TRUE}
+curve(dt(x, df=217), from=-8, to=8,
+main = 'Distribution (df = 217)')
+```
+
+
